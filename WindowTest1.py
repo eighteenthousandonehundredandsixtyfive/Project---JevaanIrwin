@@ -1,6 +1,7 @@
 #Python hello
 #https://realpython.com/python-gui-tkinter/
 #for mplotting data
+#%%
 from tkinter import *
 import time
 
@@ -82,3 +83,5 @@ if __name__ == '__main__':
         root.mainloop()
         
 
+
+# %%
