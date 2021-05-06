@@ -10,15 +10,17 @@ class main_menu():
             parent,
             text = "MRGS Telemetry Monitor",
             fg = "Black",
-            bg = "white"
+            bg = "white",
+            width = "20"
         )
 
-        intro_text.place(#...)
+        intro_text.grid(column=1, row = 10)
 
         print ("hello world")
 
 root = Tk()
 root.geometry("400x250+300+300")
+root.configure(bg="white")
 main_menu(root)
 root.mainloop()
 # %%
