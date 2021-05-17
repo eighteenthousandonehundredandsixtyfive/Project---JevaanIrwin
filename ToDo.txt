@@ -1,0 +1,1 @@
+Continue work on window formatting, image addition etc. While still being able to display toolbar etc. Maybe try to fit to screen etc.

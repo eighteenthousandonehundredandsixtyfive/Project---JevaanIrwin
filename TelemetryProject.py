@@ -2,29 +2,23 @@
 #Use pyinstaller to package as exe, must be done on hime pc
 from tkinter import * #imports everything form tkinter
 import time  #imports time functality
-
-class main_menu():
-    def __init__(self, parent):
-        intro_text = Label(
-            parent,
-            text = "MRGS Telemetry Monitor",
-            fg = "Black",
-            bg = "white",
-            width = "20"
-        )
+#https://zetcode.com/tkinter/introduction/ 
+class Window_create():
+        Main_window = Tk()
+        Main_window.attributes = ('-fullscreen', True)
         
-
-        logo = PhotoImage(file="Logo.ppm")
-
+class Main_menu():
+    def __init__(self, parent):
+        print("Intro_text start")
+        intro_text = Label(parent, text = "MRGS Telemetry Monitor", fg = "Black", bg = "white", width = "20")
         intro_text.grid(column=1, row = 10)
-        first_window.create_image(950,300, image=img)
-        print ("hello world")
 
+        telemetry_button = Button (parent, text = "Telemetry processing", width = 25, height = 1, bg = "white", fg = "black")
+        Raw_data_button = Button (parent, text = "Raw Data Processing", width = 25, height = 1, bg = "white", fg = "black")
+       
 root = Tk()
-first_window = Tk()
-first_window.geometry("1000x1000+100+100")
-root.geometry("400x250+300+300")
-root.configure(bg="white")
-main_menu(root)
+root.configure (bg  = "white")
+Window_create()
+#root.attributes('-fullscreen', True)
 root.mainloop()
 
