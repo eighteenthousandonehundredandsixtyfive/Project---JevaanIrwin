@@ -1,1 +1,7 @@
 Continue work on window formatting, image addition etc. While still being able to display toolbar etc. Maybe try to fit to screen etc.
+
+respources
+https://www.daniweb.com/programming/softwarehttps://zetcode.com/tkinter/attributes/-development/threads/64758/how-to-pass-variables-between-classes 
+https://zetcode.com/tkinter/attributes/
+https://www.pythontutorial.net/tkinter/tkinter-window/
+https://zetcode.com/tkinter/introduction/
