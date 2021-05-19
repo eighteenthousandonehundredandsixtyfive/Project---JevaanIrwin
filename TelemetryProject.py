@@ -10,8 +10,19 @@ print(action)
 
 class Raw_data():
     def __init__(self):
-        print("hello!")
-        new_window = Tk()
+        print("Raw data processing")
+        Raw_data_window = Tk()
+        Raw_data_window.title("Raw Data Processing")
+        Raw_data_window.geometry(f'{screen_width}x{screen_height}')
+        Raw_data_window.mainloop()
+
+class Tele_data():
+    def __init__(self):
+        print("telemetry processing")
+        Tele_data_window = Tk()
+        Tele_data_window.title("Telemetry Data Processing")
+        Tele_data_window.geometry(f'{screen_width}x{screen_height}')
+        Tele_data_window.mainloop()
 
 class Main_menu():
     def __init__(self, parent):
@@ -25,27 +36,26 @@ class Main_menu():
         print(rw)
 
         intro_text = Label(parent, text = "MRGS Telemetry Monitor", fg = "red", bg = "white", width = "20")
-        intro_text.place(y = 10 * rh, x = 25 * rw)
+        discription_text = Label(parent, text = "Made by Jevaan Irwin", fg = "red", bg= "white")
+        intro_text.place(x = 25 * rw, y = 10 * rh)
+        discription_text.place(x = 228 * rw, y= 10 * rh)
 
-        telemetry_button = Button (parent, text = "Telemetry processing", width = 25, height = 1, bg = "white", fg = "black", command = lambda:[print("telemetry button pressed")])
-        raw_data_button = Button (parent, text = "Raw Data Processing", width = 25, height = 1, bg = "white", fg = "black", command = lambda:[print("raw_data_pressed"), Raw_data(), main_window.destroy()])
+
+        telemetry_button = Button (parent, text = "Telemetry processing", width = 25, height = 1, bg = "white", fg = "black", command = lambda:[print("telemetry button pressed"), Tele_data()])
+        raw_data_button = Button (parent, text = "Raw Data Processing", width = 25, height = 1, bg = "white", fg = "black", command = lambda:[print("raw_data_pressed"), Raw_data()])
 
         telemetry_button.place(x = 10 * rw, y= 30 * rh)
         raw_data_button.place(x = 200 * rw, y = 30 * rh)
 
-if action == 'main':
-    main_window = Tk()
-    screen_height = (main_window.winfo_screenheight())
-    screen_width = (main_window.winfo_screenwidth())
-    main_window.geometry(f'{int(screen_width/2)}x{int(screen_height/8)}')
-    print(screen_height)
-    print(screen_width)
-    main_window.configure(bg = "white")
-    Main_menu(main_window)
-    main_window.mainloop()
-
-if action == 'raw_data':
-    main_window = Tk()
-    main_window.mainloop()
+main_window = Tk()
+main_window.title('Start Menu')
+screen_height = (main_window.winfo_screenheight())
+screen_width = (main_window.winfo_screenwidth())
+main_window.geometry(f'{int(screen_width/2)}x{int(screen_height/8)}')
+print(screen_height)
+print(screen_width)
+main_window.configure(bg = "white")
+Main_menu(main_window)
+main_window.mainloop()
 
 
