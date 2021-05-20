@@ -14,7 +14,6 @@ class Raw_data():
         Raw_data_window = Tk()
         Raw_data_window.title("Raw Data Processing")
         Raw_data_window.geometry(f'{screen_width}x{screen_height}')
-        Raw_data_window.mainloop()
 
 class Tele_data():
     def __init__(self):
@@ -22,8 +21,15 @@ class Tele_data():
         Tele_data_window = Tk()
         Tele_data_window.title("Telemetry Data Processing")
         Tele_data_window.geometry(f'{screen_width}x{screen_height}')
-        Tele_data_window.mainloop()
 
+class About():
+    def __init__ (self):
+        About_window = Tk()
+        About_window.title('About')
+        About_window.geometry(f'{int(screen_width/2)}x{int(screen_height/2)}')
+
+        About_label = Label(About_window, text = "This is a python program created by Jevaan Irwin \n It is for interfacing a arduino microcontroller with a computer \n and transfering telemetry data cotained within", bg = 'white', fg = 'black')
+        About_label.place (x = 5 * rw, y = 10 * rh)
 class Main_menu():
     def __init__(self, parent):
         print("Intro_text start")
@@ -41,11 +47,13 @@ class Main_menu():
         discription_text.place(x = 228 * rw, y= 10 * rh)
 
 
-        telemetry_button = Button (parent, text = "Telemetry processing", width = 25, height = 1, bg = "white", fg = "black", command = lambda:[print("telemetry button pressed"), Tele_data()])
-        raw_data_button = Button (parent, text = "Raw Data Processing", width = 25, height = 1, bg = "white", fg = "black", command = lambda:[print("raw_data_pressed"), Raw_data()])
+        telemetry_button = Button (parent, text = "Telemetry processing", width = 25, height = 1, bg = "white", fg = "black", command = lambda:[print("telemetry button pressed"), Tele_data(), main_window.destroy()])
+        raw_data_button = Button (parent, text = "Raw Data Processing", width = 25, height = 1, bg = "white", fg = "black", command = lambda:[print("raw_data_pressed"), Raw_data(), main_window.destroy()])
+        about_button = Button (parent, text = 'about', width = 5, height = 1, bg = 'white', fg = 'black', command = lambda:[print('About'), About()])
 
         telemetry_button.place(x = 10 * rw, y= 30 * rh)
         raw_data_button.place(x = 200 * rw, y = 30 * rh)
+        about_button.place(x = 370 * rw, y = 30 * rh)
 
 main_window = Tk()
 main_window.title('Start Menu')
