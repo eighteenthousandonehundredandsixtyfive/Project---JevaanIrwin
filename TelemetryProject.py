@@ -10,8 +10,6 @@ from types import LambdaType
 class Flight_sim():
     def __init__ (self):
         print("simulating flight") #for troublehsooting and to be removed in the final program. 
-        cur_window = ('Sim_window') #cur_window being current window
-        Uniform_gui()
         Sim_window = Tk()
         Sim_window.title('Flight Simulation')
         Sim_window.geometry(f'{screen_width}x{screen_height}')
@@ -19,7 +17,6 @@ class Flight_sim():
 class Raw_data(): #this class contains the code for the raw_data window
     def __init__(self):
         print("Raw data processing") #for troublehsooting
-        cur_window = ('Raw_data_window')
         Raw_data_window = Tk()
         Raw_data_window.title("Raw Data Processing") #for troublehsooting
         Raw_data_window.geometry(f'{screen_width}x{screen_height}')
@@ -27,7 +24,6 @@ class Raw_data(): #this class contains the code for the raw_data window
 class Tele_data(): # this class manages the code for the telemetry window
     def __init__(self):
         print("telemetry processing") #for troublehsooting
-        cur_window = ('Tele_data_window')
         Tele_data_window = Tk()
         Tele_data_window.title("Telemetry Data Processing") 
         Tele_data_window.geometry(f'{screen_width}x{screen_height}')
@@ -40,11 +36,6 @@ class About(): #This class contains the code for the about window.
 
         About_label = Label(About_window, text = "This is a python program created by Jevaan Irwin \n It is for interfacing a arduino microcontroller with a computer \n and transfering telemetry data cotained within", bg = 'white', fg = 'black')
         About_label.place (x = 5 * rw, y = 10 * rh)
-
-class Uniform_gui(): #This class contains gui elements that will be needed in all windows used throughout the program, and therefore are all produced by this class
-    def __init__ (self):
-        if cur_window == 'Sim_window':
-            print('Sim_window_gui')
 
 class Main_menu(): #this class contains the appropriate code for the main screen at the start of the porgram
     def __init__(self, parent):
@@ -78,6 +69,8 @@ class Main_menu(): #this class contains the appropriate code for the main screen
 
 main_window = Tk()
 main_window.title('Start Menu')
+global cur_window
+cur_window = 'main_window'
 screen_height = (main_window.winfo_screenheight())
 screen_width = (main_window.winfo_screenwidth())
 main_window.geometry(f'{int(screen_width/2)}x{int(screen_height/4)}')
