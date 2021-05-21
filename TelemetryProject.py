@@ -6,11 +6,12 @@ import math
 import json
 from types import LambdaType
 #https://zetcode.com/tkinter/introduction/ 
-global cur_window 
+
 class Flight_sim():
     def __init__ (self):
         print("simulating flight") #for troublehsooting and to be removed in the final program. 
-        cur_window = str('Sim_window') #cur_window being current window
+        cur_window = ('Sim_window') #cur_window being current window
+        Uniform_gui()
         Sim_window = Tk()
         Sim_window.title('Flight Simulation')
         Sim_window.geometry(f'{screen_width}x{screen_height}')
@@ -18,7 +19,7 @@ class Flight_sim():
 class Raw_data(): #this class contains the code for the raw_data window
     def __init__(self):
         print("Raw data processing") #for troublehsooting
-        cur_window = str('Raw_data_window')
+        cur_window = ('Raw_data_window')
         Raw_data_window = Tk()
         Raw_data_window.title("Raw Data Processing") #for troublehsooting
         Raw_data_window.geometry(f'{screen_width}x{screen_height}')
@@ -26,7 +27,7 @@ class Raw_data(): #this class contains the code for the raw_data window
 class Tele_data(): # this class manages the code for the telemetry window
     def __init__(self):
         print("telemetry processing") #for troublehsooting
-        cur_window = str('Tele_data_window')
+        cur_window = ('Tele_data_window')
         Tele_data_window = Tk()
         Tele_data_window.title("Telemetry Data Processing") 
         Tele_data_window.geometry(f'{screen_width}x{screen_height}')
