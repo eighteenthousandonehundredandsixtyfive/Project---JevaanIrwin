@@ -61,12 +61,8 @@ class About(): #This class contains the code for the about window.
 
 class Main_menu(): #this class contains the appropriate code for the main screen at the start of the porgram
     def __init__(self, parent):
-        print("Intro_text start") #for troublehsooting
+        print("Intro_text start") #for troublehsootingb
 
-        global rh #rh being the ratio of the computer resoulotion to 1080p, and rw is the widths ratio
-        global rw 
-        rh = 1080/screen_height # determines the ratio between the screen dimensiosn that the program is designed for and the demensions of the screen 
-        rw = 1920/screen_width  # in use, so that the ui elements can be scaled appropriatly
         print(rh) #for troublehsooting
         print(rw) #for troublehsooting
 
@@ -95,7 +91,11 @@ global cur_window
 cur_window = 'main_window'
 screen_height = (main_window.winfo_screenheight())
 screen_width = (main_window.winfo_screenwidth())
-main_window.geometry(f'{int(screen_width/2)}x{int(screen_height/4)}')
+global rh #rh being the ratio of the computer resoulotion to 1080p, and rw is the widths ratio
+global rw 
+rh = 1080/screen_height # determines the ratio between the screen dimensiosn that the program is designed for and the demensions of the screen 
+rw = 1920/screen_width  # in use, so that the ui elements can be scaled appropriatly
+main_window.geometry(f'{int(screen_width/3 * rw)}x{int(screen_height/5 * rh)}')
 print(screen_height)
 print(screen_width)
 main_window.configure(bg = "white")
