@@ -14,6 +14,28 @@ class Flight_sim():
         Sim_window.title('Flight Simulation')
         Sim_window.geometry(f'{screen_width}x{screen_height}')
 
+        Impulse_text = Entry(Sim_window, width = 5, bg = 'white', fg = 'black')
+        Impulse_label= Label(Sim_window, text = 'Engine Impulse', width = 10, height = 1, bg = 'white', fg = "black")
+        Impulse_text.place(x = 100 * rw, y = 40 * rh)
+        Impulse_label.place(x = 20 * rw, y = 42 * rh)
+
+        Weight_text = Entry(Sim_window, width = 5, bg = 'white', fg = "black")
+        Weight_label = Label(Sim_window, text = 'Total Weight', width = 10, bg = 'white', fg = 'black')
+        Weight_text.place(x = 100 * rw, y = 60 * rh)
+        Weight_label.place(x = 20 * rw, y = 62 * rh)
+
+        Time_text = Entry(Sim_window, width = 5, bg = 'white', fg = "black")
+        Time_label = Label(Sim_window, text = 'Burn Time', width = 10, bg = 'white', fg = 'black')
+        Time_text.place(x = 100 * rw, y = 80 * rh)
+        Time_label.place(x = 20 * rw, y = 82 * rh)
+
+        Simulate_Button = Button(Sim_window, text = "simulate", width = 30, height= 1, bg = "white", fg = 'black', command = lambda:[Simulate()])
+
+class Simulate():
+    def __init__(self):
+        print('hello!')
+
+
 class Raw_data(): #this class contains the code for the raw_data window
     def __init__(self):
         print("Raw data processing") #for troublehsooting
