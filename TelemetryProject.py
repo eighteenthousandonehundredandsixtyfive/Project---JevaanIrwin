@@ -40,8 +40,8 @@ class Flight_sim():
             print(Date_no)
             Date_no = str(Date_no) 
             Burn_distance = "d_b" + Date_no
-            Coast_distance = d_c + Date_no
-            Max_distance = d_m + Date_no   
+            Coast_distance = 'd_c' + Date_no
+            Max_distance = 'd_m' + Date_no   
             
             Flight_data = {
                 Burn_distance :  d_b, Coast_distance: d_c, Max_distance: d_m
