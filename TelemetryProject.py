@@ -38,7 +38,7 @@ class Flight_sim():
             date = datetime.datetime.now()
             Date_no = date.strftime("%j")
             print(Date_no)
-            Date_no = str(Date_no) 
+            Date_no = str(Date_no) #limtis the data to being updated once a day. This system will do for now, however needs to be replaced with a version that allows for more user control over what is bieng loaded, and what is being saved. i.e. being able to delete shit. 
             Burn_distance = "d_b" + Date_no
             Coast_distance = 'd_c' + Date_no
             Max_distance = 'd_m' + Date_no   
