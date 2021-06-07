@@ -9,6 +9,11 @@ from types import LambdaType
 
 class Flight_sim():
     def __init__ (self):
+
+        def hello():
+            print('hello')
+
+        global weight
         print("simulating flight") #for troublehsooting and to be removed in the final program. 
         Sim_window = Tk()
         Sim_window.title('Flight Simulation')
@@ -23,8 +28,6 @@ class Flight_sim():
         Weight_label = Label(Sim_window, text = 'Total Weight', width = 10, bg = 'white', fg = 'black')
         Weight_text.place(x = 100 * rw, y = 60 * rh)
         Weight_label.place(x = 20 * rw, y = 62 * rh)
-        global w
-        w = Weight_text.get()
 
         Time_text = Entry(Sim_window, width = 5, bg = 'white', fg = "black")
         Time_label = Label(Sim_window, text = 'Burn Time', width = 10, bg = 'white', fg = 'black')
@@ -34,10 +37,15 @@ class Flight_sim():
         Simulate_button = Button(Sim_window, text = "simulate", width = 30, height= 1, bg = "white", fg = 'black', command = lambda:[Simulate()])
         Simulate_button.place(x = 100 * rw, y = 100 * rh)
 
+        hello_button = Button(Sim_window, text = 'hello', command = hello())
+        hello_button.place(x = 100, y = 100)
+
 class Simulate():
     def __init__(self):
+        w = float(weight)
         m = w / 9.81
         print (w)
+        print(m)
 
 
 class Raw_data(): #this class contains the code for the raw_data window
