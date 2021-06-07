@@ -15,10 +15,6 @@ data = {
     'a': a
 }
 
-a = 1
-a = str(a)
-b = "str"
-print (a + ' ' + b)
 with open("data_file.json", "w") as write_file:
     json.dump(data, write_file)
 
