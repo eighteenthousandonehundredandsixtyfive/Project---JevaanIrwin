@@ -4,20 +4,52 @@ from tkinter import * #imports everything form tkinter
 import time  #imports time functality
 import math
 import json
+import datetime
 from types import LambdaType
-#https://zetcode.com/tkinter/introduction/ 
+#https://zetcode.com/tkinter/introduction/ temp
 
 class Flight_sim():
     def __init__ (self):
 
-        def hello():
-            print('hello')
-
-        global weight
         print("simulating flight") #for troublehsooting and to be removed in the final program. 
         Sim_window = Tk()
         Sim_window.title('Flight Simulation')
         Sim_window.geometry(f'{screen_width}x{screen_height}')
+
+        def Simulation(): 
+            thrust = Thrust_text.get()
+            weight = Weight_text.get()
+            r_time = Time_text.get()
+            print ("simulating")
+            i = float(thrust)  # this is impulse # all the entry boxes must be filled in or else error will be returned. Need to add featrues sucha seasier navigation with tab, pressing enter etc. 
+            w = float(weight)
+            t = float(r_time)
+  
+            T = i / t #T = thrust
+            m = w / 9.81
+            a = (T - w) / m
+            d_b = (0.5) * (a) * (t ** 2) # distance during the burn time . 
+            v = a * t # v being the time after burn
+            E = (0.5) * (m) * (v ** 2)
+            d_c = E / (m * 9.81) # d_c being the distance coasted to apoapsis
+            print (d_b, d_c, d_b + d_c) 
+            d_m = d_c + d_b # maximum height theoretically.
+
+            date = datetime.datetime.now()
+            Date_no = date.strftime("%j")
+            print(Date_no)
+            Date_no = str(Date_no) 
+            Burn_distance = "d_b" + Date_no
+            Coast_distance = d_c + Date_no
+            Max_distance = d_m + Date_no   
+            
+            Flight_data = {
+                Burn_distance :  d_b, Coast_distance: d_c, Max_distance: d_m
+            }
+
+            with open("flight_data.json", "w") as write_file:
+                json.dump(Flight_data, write_file)
+
 
         Thrust_text = Entry(Sim_window, width = 5, bg = 'white', fg = 'black')
         Thrust_label= Label(Sim_window, text = 'Avg. Thrust', width = 10, height = 1, bg = 'white', fg = "black")
@@ -34,19 +66,8 @@ class Flight_sim():
         Time_text.place(x = 100 * rw, y = 80 * rh)
         Time_label.place(x = 20 * rw, y = 82 * rh)
 
-        Simulate_button = Button(Sim_window, text = "simulate", width = 30, height= 1, bg = "white", fg = 'black', command = lambda:[Simulate()])
+        Simulate_button = Button(Sim_window, text = "simulate", width = 30, height= 1, bg = "white", fg = 'black', command = lambda:[Simulation()])
         Simulate_button.place(x = 100 * rw, y = 100 * rh)
-
-        hello_button = Button(Sim_window, text = 'hello', command = hello())
-        hello_button.place(x = 100, y = 100)
-
-class Simulate():
-    def __init__(self):
-        w = float(weight)
-        m = w / 9.81
-        print (w)
-        print(m)
-
 
 class Raw_data(): #this class contains the code for the raw_data window
     def __init__(self):
