@@ -53,21 +53,26 @@ class Flight_sim():
 
         Thrust_text = Entry(Sim_window, width = 5, bg = 'white', fg = 'black')
         Thrust_label= Label(Sim_window, text = 'Avg. Thrust', width = 10, height = 1, bg = 'white', fg = "black")
-        Thrust_text.place(x = 100 * rw, y = 40 * rh)
-        Thrust_label.place(x = 20 * rw, y = 42 * rh)
+        Thrust_text.place(x = 140 * rw, y = 40 * rh)
+        Thrust_label.place(x = 70 * rw, y = 42 * rh)
 
         Weight_text = Entry(Sim_window, width = 5, bg = 'white', fg = "black")
         Weight_label = Label(Sim_window, text = 'Total Weight', width = 10, bg = 'white', fg = 'black')
-        Weight_text.place(x = 100 * rw, y = 60 * rh)
-        Weight_label.place(x = 20 * rw, y = 62 * rh)
+        Weight_text.place(x = 140 * rw, y = 60 * rh)
+        Weight_label.place(x = 70 * rw, y = 62 * rh)
 
         Time_text = Entry(Sim_window, width = 5, bg = 'white', fg = "black")
         Time_label = Label(Sim_window, text = 'Burn Time', width = 10, bg = 'white', fg = 'black')
-        Time_text.place(x = 100 * rw, y = 80 * rh)
-        Time_label.place(x = 20 * rw, y = 82 * rh)
+        Time_text.place(x = 140 * rw, y = 80 * rh)
+        Time_label.place(x = 70 * rw, y = 82 * rh)
 
         Simulate_button = Button(Sim_window, text = "simulate", width = 30, height= 1, bg = "white", fg = 'black', command = lambda:[Simulation()])
-        Simulate_button.place(x = 100 * rw, y = 100 * rh)
+        Simulate_button.place(x = 60 * rw, y = 140 * rh)
+
+        Date_name = Entry(Sim_window, width = 30, bg = "white", fg = 'black')
+        Date_name_label = Label(Sim_window, text = "Data Name", fg = "black", bg = "white", borderwidth= 1, relief = "ridge", width = 29)
+        Date_name.place(x = 58 * rw, y = 118 * rh)
+        Date_name_label.place(x = 60 * rw, y = 100 * rh)
 
 class Raw_data(): #this class contains the code for the raw_data window
     def __init__(self):
