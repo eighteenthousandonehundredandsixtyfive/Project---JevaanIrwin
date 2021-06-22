@@ -53,7 +53,7 @@ class Flight_sim():
 
         Thrust_text = Entry(Sim_window, width = 5, bg = 'white', fg = 'black')
         Thrust_label= Label(Sim_window, text = 'Avg. Thrust', width = 10, height = 1, bg = 'white', fg = "black")
-        Thrust_text.place(x = 140 * rw, y = 40 * rh)
+        Thrust_text.grid(column = 4, row = 10)
         Thrust_label.place(x = 70 * rw, y = 42 * rh)
 
         Weight_text = Entry(Sim_window, width = 5, bg = 'white', fg = "black")
