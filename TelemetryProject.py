@@ -68,23 +68,30 @@ class Flight_sim():
 
                    # if len(data) != 0: #checks to see if there is an index present, or if the JSON is empty
 
-                    Index_new = data['Flight_data'] #if the index is present then i remove it from the data and modify it to include the newset additon to the code.
-                    print(data)                   
-                    print(data['Flight_data']) 
-                    print(Index_new)
-                    print(Index_new['Index'])
-                    print(Index_new['Index']['Index_no'])
-                    Index_no_new = (Index_new['Index']['Index_no'])
-                    del data['Flight_data']['Index']
+                     #if the index is present then i remove it from the data and modify it to include the newset additon to the code.
+
                     print(data)
-                    print(Index_new)
+                    Index_no_new = data["Flight_data"]["Index"]["Index_no"]
+                    Index_no_new += 1
+
+                    Index_new = {
+                        "Index" : {'Index_no' : Index_no_new}
+                    }
+                    
+                    Temp_no = 1
+
                     print(Index_no_new)
-                    Index_no_new =+ 1
-                    print(Index_new['Index'])
-                    print(Index_no_new)
-                    Index_new['Index'].update({Index_no_new: File_name})
-                    del Index_new['Index']['Index_no']
-                    Index_new['Index'].update({'Index_no': Index_no_new})
+                    print(Temp_no)
+
+                    while Temp_no < Index_no_new:
+                        Index_new["Index"].update({str(Temp_no): data['Flight_data']['Index'][str(Temp_no)]})
+                        Temp_no += 1
+                        print("Adding")
+
+                    if Temp_no == Index_no_new:
+                        Index_new["Index"].update({Index_no_new: File_name})
+                        
+                    del data['Flight_data']['Index']
                     print(Index_new)
 
                     # else:  #if there is no index present in the JSON then i create and add one
@@ -92,17 +99,17 @@ class Flight_sim():
                     #         'Index' : {"Index_no":1, "1": File_name}
                     #     }
 
-                    with open("flight_data", "w") as write_file: #loads the data already present when the file was open, if any. 
-                        json.dump(data, write_file, indent = 2)
+                    # with open("flight_data", "w") as write_file: #loads the data already present when the file was open, if any. 
+                    #     json.dump(data, write_file, indent = 2)
                         
-                    Flight_data = {
-                        File_name : {'Burn_distance' :  d_b, 'Coast_distance': d_c, 'Max_distance': d_m}
-                    }
-                    with open('flight_data', 'a') as write_file:
-                        json.dump(Flight_data, write_file, indent = 2)
+                    # Flight_data = {
+                    #     File_name : {'Burn_distance' :  d_b, 'Coast_distance': d_c, 'Max_distance': d_m}
+                    # }
+                    # with open('flight_data', 'a') as write_file:
+                    #     json.dump(Flight_data, write_file, indent = 2)
 
-                    with open('flight_data', 'a') as write_file:
-                        json.dump(Index_new, write_file, indent = 2)
+                    # with open('flight_data', 'a') as write_file:
+                    #     json.dump(Index_new, write_file, indent = 2)
 
                     
 

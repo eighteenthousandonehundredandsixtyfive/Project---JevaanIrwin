@@ -1,7 +1,8 @@
 {
     "Flight_data":{
         "Index" :{
-            "Index_no" : 0
+            "Index_no" : 1, 
+            "1" : "Premade"
         },
         "Premade":{
             "Burn_distance" : "100",
