@@ -69,13 +69,18 @@ class Flight_sim():
                    # if len(data) != 0: #checks to see if there is an index present, or if the JSON is empty
 
                     Index_new = data['Flight_data'] #if the index is present then i remove it from the data and modify it to include the newset additon to the code.
+                    print(data)                   
                     print(data['Flight_data']) 
                     print(Index_new)
                     print(Index_new['Index'])
                     print(Index_new['Index']['Index_no'])
-                    del data['Flight_data']['Index']
                     Index_no_new = (Index_new['Index']['Index_no'])
+                    del data['Flight_data']['Index']
+                    print(data)
+                    print(Index_new)
+                    print(Index_no_new)
                     Index_no_new =+ 1
+                    print(Index_new['Index'])
                     print(Index_no_new)
                     Index_new['Index'].update({Index_no_new: File_name})
                     del Index_new['Index']['Index_no']
@@ -104,11 +109,7 @@ class Flight_sim():
 
         Thrust_text = Entry(Sim_window, width = 5, bg = 'white', fg = 'black')
         Thrust_label= Label(Sim_window, text = 'Avg. Thrust', width = 10, height = 1, bg = 'white', fg = "black")
-<<<<<<< HEAD
         Thrust_text.place(x = 150 * rw, y = 40 * rh)
-=======
-        Thrust_text.grid(column = 4, row = 10)
->>>>>>> 89c2d929a9f304ac1d12e229d0b05fd09363213b
         Thrust_label.place(x = 70 * rw, y = 42 * rh)
 
         Weight_text = Entry(Sim_window, width = 5, bg = 'white', fg = "black")
