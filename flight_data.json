@@ -2,6 +2,11 @@
     "Flight_data":{
         "Index" :{
             "Index_no" : 0
+        },
+        "Premade":{
+            "Burn_distance" : "100",
+            "Coast_distance" : "150",
+            "Max_distance" : "250"
         }
     }
 }
