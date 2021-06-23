@@ -60,18 +60,13 @@ class Flight_sim():
                 if len(File_name) == 0: # checks to make sure there is an entry for the data. 
                     File_warn_2.place(x = 210 * rw, y = 118 * rh)
                 else:
-                    #if len(File_name) == 0:
-                     #   File_warn_2.delete() not working as intended
-
+                
                     with open("flight_data.json", "r") as read_file:
                         data = json.load(read_file)
 
-                   # if len(data) != 0: #checks to see if there is an index present, or if the JSON is empty
-
-                     #if the index is present then i remove it from the data and modify it to include the newset additon to the code.
-
                     print(data)
                     Index_no_new = data["Flight_data"]["Index"]["Index_no"]
+                    print(Index_no_new)
                     Index_no_new += 1
 
                     Index_new = {
@@ -86,6 +81,7 @@ class Flight_sim():
                     while Temp_no < Index_no_new:
                         Index_new["Index"].update({str(Temp_no): data['Flight_data']['Index'][str(Temp_no)]})
                         Temp_no += 1
+                        print(Temp_no)
                         print("Adding")
 
                     if Temp_no == Index_no_new:
@@ -94,25 +90,12 @@ class Flight_sim():
                     del data['Flight_data']['Index']
                     print(Index_new)
 
-                    # else:  #if there is no index present in the JSON then i create and add one
-                    #     Index_new = {
-                    #         'Index' : {"Index_no":1, "1": File_name}
-                    #     }
+                    data['Flight_data'].update({str(File_name): {"Burn_distance" : str(d_b), 'Coast_distance' : str(d_c), 'Max_distance': d_m, 'i': i, 'w': w, 't': t }})
+                    data['Flight_data'].update(Index_new)
+                    print(data)
 
-                    # with open("flight_data", "w") as write_file: #loads the data already present when the file was open, if any. 
-                    #     json.dump(data, write_file, indent = 2)
-                        
-                    # Flight_data = {
-                    #     File_name : {'Burn_distance' :  d_b, 'Coast_distance': d_c, 'Max_distance': d_m}
-                    # }
-                    # with open('flight_data', 'a') as write_file:
-                    #     json.dump(Flight_data, write_file, indent = 2)
-
-                    # with open('flight_data', 'a') as write_file:
-                    #     json.dump(Index_new, write_file, indent = 2)
-
-                    
-
+                    with open('flight_data', "w") as write_file:
+                        json.dump(data, write_file, indent = 2)
 
         Thrust_text = Entry(Sim_window, width = 5, bg = 'white', fg = 'black')
         Thrust_label= Label(Sim_window, text = 'Avg. Thrust', width = 10, height = 1, bg = 'white', fg = "black")

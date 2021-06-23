@@ -7,7 +7,10 @@
         "Premade":{
             "Burn_distance" : "100",
             "Coast_distance" : "150",
-            "Max_distance" : "250"
+            "Max_distance" : "250",
+            "i" : "1",
+            "w" : "2",
+            "t" : "3"
         }
     }
 }

@@ -1,0 +1,25 @@
+{
+  "Flight_data": {
+    "Premade": {
+      "Burn_distance": "100",
+      "Coast_distance": "150",
+      "Max_distance": "250",
+      "i": "1",
+      "w": "2",
+      "t": "3"
+    },
+    "Test": {
+      "Burn_distance": "-36.7875",
+      "Coast_distance": "30.656250000000007",
+      "Max_distance": -6.131249999999994,
+      "i": 1.0,
+      "w": 2.0,
+      "t": 3.0
+    },
+    "Index": {
+      "Index_no": 2,
+      "1": "Premade",
+      "2": "Test"
+    }
+  }
+}
