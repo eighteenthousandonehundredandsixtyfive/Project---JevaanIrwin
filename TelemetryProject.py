@@ -23,7 +23,7 @@ class Flight_sim():
             r_time = Time_text.get()
 
             warned = False
-            File_warn = Label(Sim_window, text = "Cannot be empty, or word", bg = 'white', fg = 'red')
+            File_warn = Label(Sim_window, text = "Cannot be empty, or a word", bg = 'white', fg = 'red')
             File_warn_2 = Label(Sim_window, text = "Cannot be empty", bg = 'white', fg = 'red')
 
             if len(thrust) == 0 or thrust.isdigit() == False or  len(weight) == 0 or  weight.isdigit() == False or len(r_time) == 0 or  r_time.isdigit() == False: #checks to make sure each field contains values else the program wont work
@@ -53,25 +53,53 @@ class Flight_sim():
                 d_c = E / (m * 9.81) # d_c being the distance coasted to apoapsis
                 print (d_b, d_c, d_b + d_c) 
                 d_m = d_c + d_b # maximum height theoretically.
+                
 
                 File_name = Data_name.get()
-
+                 
                 if len(File_name) == 0: # checks to make sure there is an entry for the data. 
                     File_warn_2.place(x = 210 * rw, y = 118 * rh)
                 else:
-                    if len(File_name) == 0:
-                        File_warn_2.delete()
-                    
-                    Burn_distance = "d_b"
-                    Coast_distance = 'd_c'
-                    Max_distance = 'd_m'  
-                    
-                    Flight_data = {
-                        Burn_distance :  d_b, Coast_distance: d_c, Max_distance: d_m
-                    }
+                    #if len(File_name) == 0:
+                     #   File_warn_2.delete() not working as intended
 
-                    with open("flight_data.json", "w") as write_file:
-                        json.dump(Flight_data, write_file)
+                    with open("flight_data.json", "r") as read_file:
+                        data = json.load(read_file)
+
+                   # if len(data) != 0: #checks to see if there is an index present, or if the JSON is empty
+
+                    Index_new = data['Flight_data'] #if the index is present then i remove it from the data and modify it to include the newset additon to the code.
+                    print(data['Flight_data']) 
+                    print(Index_new)
+                    print(Index_new['Index'])
+                    print(Index_new['Index']['Index_no'])
+                    del data['Flight_data']['Index']
+                    Index_no_new = (Index_new['Index']['Index_no'])
+                    Index_no_new =+ 1
+                    print(Index_no_new)
+                    Index_new['Index'].update({Index_no_new: File_name})
+                    del Index_new['Index']['Index_no']
+                    Index_new['Index'].update({'Index_no': Index_no_new})
+                    print(Index_new)
+
+                    # else:  #if there is no index present in the JSON then i create and add one
+                    #     Index_new = {
+                    #         'Index' : {"Index_no":1, "1": File_name}
+                    #     }
+
+                    with open("flight_data", "w") as write_file: #loads the data already present when the file was open, if any. 
+                        json.dump(data, write_file, indent = 2)
+                        
+                    Flight_data = {
+                        File_name : {'Burn_distance' :  d_b, 'Coast_distance': d_c, 'Max_distance': d_m}
+                    }
+                    with open('flight_data', 'a') as write_file:
+                        json.dump(Flight_data, write_file, indent = 2)
+
+                    with open('flight_data', 'a') as write_file:
+                        json.dump(Index_new, write_file, indent = 2)
+
+                    
 
 
         Thrust_text = Entry(Sim_window, width = 5, bg = 'white', fg = 'black')

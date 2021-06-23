@@ -15,6 +15,11 @@ data = {
     'a': a
 }
 
+nested_dictionary ={'dic_one': {'age': '12', 'name': 'benjamin', "lastname": 'irwin'},
+                    'dic_two': {'age': '17', 'name': 'jevaan', "lastname": 'irwin'}}
+
 with open("data_file.json", "w") as write_file:
-    json.dump(data, write_file)
+    json.dump(nested_dictionary, write_file, indent = 2)
+
+
 
