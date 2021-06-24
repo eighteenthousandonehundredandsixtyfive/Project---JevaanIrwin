@@ -14,7 +14,7 @@ class Flight_sim():
         print("simulating flight") #for troublehsooting and to be removed in the final program. 
         Sim_window = Tk()
         Sim_window.title('Flight Simulation')
-        Sim_window.geometry(f'{screen_width}x{screen_height}')
+        Sim_window.geometry(f'{int(screen_width/2)}x{int(screen_height/2)}')
         Sim_window.configure(bg = "white")
 
         def Simulation(): 
@@ -24,7 +24,6 @@ class Flight_sim():
 
             warned = False
             File_warn = Label(Sim_window, text = "Cannot be empty, or a word", bg = 'white', fg = 'red')
-            File_warn_2 = Label(Sim_window, text = "Cannot be empty", bg = 'white', fg = 'red')
 
             if len(thrust) == 0 or thrust.isdigit() == False or  len(weight) == 0 or  weight.isdigit() == False or len(r_time) == 0 or  r_time.isdigit() == False: #checks to make sure each field contains values else the program wont work
                 warned = True
@@ -38,6 +37,13 @@ class Flight_sim():
                 if warned == True: #not working as intended though not vital to functionality
                     File_warn.delete()
                     warned = False
+                global i
+                global w
+                global t
+
+                global d_b
+                global d_c
+                global d_m
 
                 i = float(thrust)  # this is impulse # all the entry boxes must be filled in or else error will be returned. Need to add featrues sucha seasier navigation with tab, pressing enter etc. 
                 w = float(weight)
@@ -51,40 +57,62 @@ class Flight_sim():
                 E = (0.5) * (m) * (v ** 2)
                 d_c = E / (m * 9.81) # d_c being the distance coasted to apoapsis
                 d_m = d_c + d_b #maximum height theoretically.
-                
-
-                File_name = Data_name.get()
                  
-                if len(File_name) == 0: # checks to make sure there is an entry for the data. 
-                    File_warn_2.place(x = 210 * rw, y = 118 * rh)
-                else:
+        def Save():
+            File_warn_2 = Label(Sim_window, text = "Cannot be empty", bg = 'white', fg = 'red')
+            File_name = Data_name.get()
+
+            if len(File_name) == 0: # checks to make sure there is an entry for the data. 
+                File_warn_2.place(x = 210 * rw, y = 118 * rh)
+            else:
+            
+                read_file = open("flight_data.json", "r")
+                data = json.load(read_file)
+
+                Index_no_new = data["Flight_data"]["Index"]["Index_no"]
+                Index_no_new += 1
+
+                Index_new = {
+                    "Index" : {'Index_no' : Index_no_new}
+                }
                 
-                    read_file = open("flight_data.json", "r")
-                    data = json.load(read_file)
+                Temp_no = 1
 
-                    Index_no_new = data["Flight_data"]["Index"]["Index_no"]
-                    Index_no_new += 1
+                while Temp_no < Index_no_new:
+                    Index_new["Index"].update({str(Temp_no): data['Flight_data']['Index'][str(Temp_no)]})
+                    Temp_no += 1
 
-                    Index_new = {
-                        "Index" : {'Index_no' : Index_no_new}
-                    }
+                if Temp_no == Index_no_new:
+                    Index_new["Index"].update({Index_no_new: File_name})
                     
-                    Temp_no = 1
+                del data['Flight_data']['Index']
 
-                    while Temp_no < Index_no_new:
-                        Index_new["Index"].update({str(Temp_no): data['Flight_data']['Index'][str(Temp_no)]})
-                        Temp_no += 1
+                data['Flight_data'].update({str(File_name): {"Burn_distance" : d_b, 'Coast_distance' : d_c, 'Max_distance': d_m, 'i': i, 'w': w, 't': t }})
+                data['Flight_data'].update(Index_new)
 
-                    if Temp_no == Index_no_new:
-                        Index_new["Index"].update({Index_no_new: File_name})
-                        
-                    del data['Flight_data']['Index']
+                with open('flight_data.json', "w") as write_file:
+                    json.dump(data, write_file, indent = 2)
+        
+        def List_data(): #lists the data and adds to list box, in fucntion so that the listbox can be refreshed. 
+            read_file = open("flight_data.json", "r")
+            data = json.load(read_file)
 
-                    data['Flight_data'].update({str(File_name): {"Burn_distance" : d_b, 'Coast_distance' : d_c, 'Max_distance': d_m, 'i': i, 'w': w, 't': t }})
-                    data['Flight_data'].update(Index_new)
+            Index_no = data['Flight_data']['Index']['Index_no']
+            Temp_no = 1
 
-                    with open('flight_data.json', "w") as write_file:
-                        json.dump(data, write_file, indent = 2)
+            while Temp_no < Index_no or Temp_no == Index_no:
+                Frame_data.insert(int(Temp_no), str(data['Flight_data']['Index'][str(Temp_no)]))
+                Temp_no += 1
+
+            
+
+        #Below all(most) the GUI elements are created and added to the window          
+        var = IntVar() #not entirely sure what this does, though i belevie it could simple be substituted for a interger pr string within the radio button declaration itself
+        Radio_but_1 = Radiobutton(Sim_window, variable = var, value = 1,  text = 'Input Data', command = lambda:[print('Inputting data')])
+        Radio_but_2 = Radiobutton(Sim_window, variable = var, value = 2, text = 'Load data', command = lambda:[print('loading data')])
+
+        Radio_but_1.place(x = 150 * rw, y = 10 * rh)
+        Radio_but_2.place(x = 250 * rw, y = 10 * rh)
 
         Thrust_text = Entry(Sim_window, width = 5, bg = 'white', fg = 'black')
         Thrust_label= Label(Sim_window, text = 'Avg. Thrust', width = 10, height = 1, bg = 'white', fg = "black")
@@ -102,12 +130,30 @@ class Flight_sim():
         Time_label.place(x = 70 * rw, y = 82 * rh)
 
         Simulate_button = Button(Sim_window, text = "simulate", width = 30, height= 1, bg = "white", fg = 'black', command = lambda:[Simulation()])
-        Simulate_button.place(x = 60 * rw, y = 140 * rh)
+        Simulate_button.place(x = 60 * rw, y = 100 * rh)
 
         Data_name = Entry(Sim_window, width = 30, bg = "white", fg = 'black')
         Data_name_label = Label(Sim_window, text = "Data Name", fg = "black", bg = "white", width = 29)
-        Data_name.place(x = 58 * rw, y = 118 * rh)
-        Data_name_label.place(x = 60 * rw, y = 100 * rh)
+        Data_name.place(x = 58 * rw, y = 148 * rh)
+        Data_name_label.place(x = 60 * rw, y = 130 * rh)
+
+        Save_button = Button(Sim_window, text = 'Save', width = 30, height= 1, bg = "white", fg = 'black', command = lambda:[Save()])
+        Save_button.place(x = 60 * rw, y = 170 * rh)
+
+        Data_frame = Frame(Sim_window, height = 10, width = 10)
+        Data_frame.place(x = 300 *rw, y = 40 * rh)
+
+        Frame_data = Listbox(Data_frame, height = 10)
+        Frame_data.pack(side = 'left', fill = 'y')
+        List_data()
+
+        Terminal_frame = Frame(Sim_window, height = 50, width = 22)
+        Terminal_frame.place(x = 400 * rw, y = 40 * rh)
+
+        # Terminal_text = 'Output Terminal /n new line' issue with inserting text
+        # Terminal = Text(Terminal_frame, height = 50, width = 20, text = Terminal_text)
+        # Terminal.pack(side = 'left', fill = 'y')
+
 
 class Raw_data(): #this class contains the code for the raw_data window
     def __init__(self):
