@@ -61,8 +61,8 @@ class Flight_sim():
                     File_warn_2.place(x = 210 * rw, y = 118 * rh)
                 else:
                 
-                    with open("flight_data.json", "r") as read_file:
-                        data = json.load(read_file)
+                    read_file = open("flight_data.json", "r")
+                    data = json.load(read_file)
 
                     print(data)
                     Index_no_new = data["Flight_data"]["Index"]["Index_no"]
@@ -90,11 +90,11 @@ class Flight_sim():
                     del data['Flight_data']['Index']
                     print(Index_new)
 
-                    data['Flight_data'].update({str(File_name): {"Burn_distance" : str(d_b), 'Coast_distance' : str(d_c), 'Max_distance': d_m, 'i': i, 'w': w, 't': t }})
+                    data['Flight_data'].update({str(File_name): {"Burn_distance" : d_b, 'Coast_distance' : d_c, 'Max_distance': d_m, 'i': i, 'w': w, 't': t }})
                     data['Flight_data'].update(Index_new)
                     print(data)
 
-                    with open('flight_data', "w") as write_file:
+                    with open('flight_data.json', "w") as write_file:
                         json.dump(data, write_file, indent = 2)
 
         Thrust_text = Entry(Sim_window, width = 5, bg = 'white', fg = 'black')

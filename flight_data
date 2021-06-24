@@ -8,7 +8,7 @@
       "w": "2",
       "t": "3"
     },
-    "Test": {
+    "test": {
       "Burn_distance": "-36.7875",
       "Coast_distance": "30.656250000000007",
       "Max_distance": -6.131249999999994,
@@ -19,7 +19,7 @@
     "Index": {
       "Index_no": 2,
       "1": "Premade",
-      "2": "Test"
+      "2": "test"
     }
   }
 }

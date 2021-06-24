@@ -1,16 +1,35 @@
 {
-    "Flight_data":{
-        "Index" :{
-            "Index_no" : 1, 
-            "1" : "Premade"
-        },
-        "Premade":{
-            "Burn_distance" : "100",
-            "Coast_distance" : "150",
-            "Max_distance" : "250",
-            "i" : "1",
-            "w" : "2",
-            "t" : "3"
-        }
+  "Flight_data": {
+    "Premade": {
+      "Burn_distance": "100",
+      "Coast_distance": "150",
+      "Max_distance": "250",
+      "i": "1",
+      "w": "2",
+      "t": "3"
+    },
+    "test": {
+      "Burn_distance": "-36.7875",
+      "Coast_distance": "30.656250000000007",
+      "Max_distance": -6.131249999999994,
+      "i": 1.0,
+      "w": 2.0,
+      "t": 3.0
+    },
+    "test2": {
+      "Burn_distance": "-29.43",
+      "Coast_distance": "19.62",
+      "Max_distance": -9.809999999999999,
+      "i": 3.0,
+      "w": 3.0,
+      "t": 3.0
+    },
+    "Index": {
+      "Index_no": 4,
+      "1": "Premade",
+      "2": "test",
+      "3": "test2",
+      "4": "test2"
     }
+  }
 }
