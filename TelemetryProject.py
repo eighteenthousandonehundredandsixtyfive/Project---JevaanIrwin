@@ -39,7 +39,6 @@ class Flight_sim():
                     File_warn.delete()
                     warned = False
 
-                print ("simulating")
                 i = float(thrust)  # this is impulse # all the entry boxes must be filled in or else error will be returned. Need to add featrues sucha seasier navigation with tab, pressing enter etc. 
                 w = float(weight)
                 t = float(r_time)
@@ -51,8 +50,7 @@ class Flight_sim():
                 v = a * t # v being the time after burn
                 E = (0.5) * (m) * (v ** 2)
                 d_c = E / (m * 9.81) # d_c being the distance coasted to apoapsis
-                print (d_b, d_c, d_b + d_c) 
-                d_m = d_c + d_b # maximum height theoretically.
+                d_m = d_c + d_b #maximum height theoretically.
                 
 
                 File_name = Data_name.get()
@@ -64,9 +62,7 @@ class Flight_sim():
                     read_file = open("flight_data.json", "r")
                     data = json.load(read_file)
 
-                    print(data)
                     Index_no_new = data["Flight_data"]["Index"]["Index_no"]
-                    print(Index_no_new)
                     Index_no_new += 1
 
                     Index_new = {
@@ -75,24 +71,17 @@ class Flight_sim():
                     
                     Temp_no = 1
 
-                    print(Index_no_new)
-                    print(Temp_no)
-
                     while Temp_no < Index_no_new:
                         Index_new["Index"].update({str(Temp_no): data['Flight_data']['Index'][str(Temp_no)]})
                         Temp_no += 1
-                        print(Temp_no)
-                        print("Adding")
 
                     if Temp_no == Index_no_new:
                         Index_new["Index"].update({Index_no_new: File_name})
                         
                     del data['Flight_data']['Index']
-                    print(Index_new)
 
                     data['Flight_data'].update({str(File_name): {"Burn_distance" : d_b, 'Coast_distance' : d_c, 'Max_distance': d_m, 'i': i, 'w': w, 't': t }})
                     data['Flight_data'].update(Index_new)
-                    print(data)
 
                     with open('flight_data.json', "w") as write_file:
                         json.dump(data, write_file, indent = 2)
@@ -147,8 +136,8 @@ class Main_menu(): #this class contains the appropriate code for the main screen
     def __init__(self, parent):
         print("Intro_text start") #for troublehsootingb
 
-        print(rh) #for troublehsooting
-        print(rw) #for troublehsooting
+        #print(rh) #for troublehsooting
+        #print(rw) #for troublehsooting
 
         intro_text = Label(parent, text = "MRGS Telemetry Monitor", fg = "red", bg = "white", width = 25)
         discription_text = Label(parent, text = "Made by Jevaan Irwin", fg = "red", bg= "white", width = 25)
