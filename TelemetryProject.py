@@ -5,8 +5,6 @@ import time  #imports time functality
 import math
 import json
 import datetime
-from types import LambdaType
-#https://zetcode.com/tkinter/introduction/ temp
 
 class Flight_sim():
     def __init__ (self):
@@ -14,7 +12,7 @@ class Flight_sim():
         print("simulating flight") #for troublehsooting and to be removed in the final program. 
         Sim_window = Tk()
         Sim_window.title('Flight Simulation')
-        Sim_window.geometry(f'{int(screen_width/2)}x{int(screen_height/2)}')
+        Sim_window.geometry(f'{int(screen_width/1.25)}x{int(screen_height/2)}')
         Sim_window.configure(bg = "white")
 
         def Simulation(): 
@@ -57,6 +55,10 @@ class Flight_sim():
                 E = (0.5) * (m) * (v ** 2)
                 d_c = E / (m * 9.81) # d_c being the distance coasted to apoapsis
                 d_m = d_c + d_b #maximum height theoretically.
+
+                Terminal.config(state = NORMAL)
+                Terminal.insert(INSERT, '\n***Simiulated Data*** \n Burn Distance: ' + str(d_b) + '\n Coast Distance: ' + str(d_c) + '\n Maximum Distance: ' + str(d_m))
+                Terminal.config(state = DISABLED)
                  
         def Save():
             File_warn_2 = Label(Sim_window, text = "Cannot be empty", bg = 'white', fg = 'red')
@@ -146,13 +148,21 @@ class Flight_sim():
         Frame_data = Listbox(Data_frame, height = 10)
         Frame_data.pack(side = 'left', fill = 'y')
         List_data()
+        Data_scroll = Scrollbar(Data_frame)
+        Data_scroll.pack(side = RIGHT, fill = Y)
+        Frame_data.config(yscrollcommand = Data_scroll.set)
+        Data_scroll.config( command = Frame_data.yview )
 
-        Terminal_frame = Frame(Sim_window, height = 50, width = 22)
-        Terminal_frame.place(x = 400 * rw, y = 40 * rh)
+        Terminal_frame = Frame(Sim_window, height = 50, width = 40, relief = GROOVE, bd = 2)
+        Terminal_frame.place(x = 450 * rw, y = 40 * rh)
 
-        # Terminal_text = 'Output Terminal /n new line' issue with inserting text
-        # Terminal = Text(Terminal_frame, height = 50, width = 20, text = Terminal_text)
-        # Terminal.pack(side = 'left', fill = 'y')
+        Terminal_text = 'Output Terminal'
+        Terminal = Text(Terminal_frame, height = 50, width = 30)
+        Terminal.pack(side = 'left', fill = 'y')
+        Terminal.insert(INSERT, Terminal_text)
+        Terminal.config(state = DISABLED) 
+
+
 
 
 class Raw_data(): #this class contains the code for the raw_data window
