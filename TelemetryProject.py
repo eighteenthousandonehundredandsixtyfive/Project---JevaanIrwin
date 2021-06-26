@@ -60,7 +60,7 @@ class Flight_sim():
                 Terminal.insert(INSERT, '\n***Simiulated Data*** \n Burn Distance: ' + str(d_b) + '\n Coast Distance: ' + str(d_c) + '\n Maximum Distance: ' + str(d_m))
                 Terminal.config(state = DISABLED)
                  
-        def Save():
+        def Save(): #Button that saves the simulated Data to a JSON file. 
             File_warn_2 = Label(Sim_window, text = "Cannot be empty", bg = 'white', fg = 'red')
             File_name = Data_name.get()
 
@@ -106,7 +106,41 @@ class Flight_sim():
                 Frame_data.insert(int(Temp_no), str(data['Flight_data']['Index'][str(Temp_no)]))
                 Temp_no += 1
 
-            
+        def Data_delete(): #for deleting data from 
+            Name = Frame_data.get(ANCHOR)
+
+            read_file = open("flight_data.json", "r")
+            data = json.load(read_file)
+            Index_new = data['Flight_data']['Index']
+
+            print(data)
+            print('\n' , Index_new)
+            Temp_no = 1
+            Index_no = data['Flight_data']['Index']['Index_no']
+            del data['Flight_data']['Index']
+
+            while Temp_no < Index_no or Temp_no == Index_no:
+                print(Temp_no)
+                Name_temp = data['Flight_data']['Index'][str(Temp_no)]
+
+                if Name_temp == Name:
+                    #del Index_new[Temp_no]
+                    #del data['Flight_data'][Name]
+
+                    val = 1
+                    Data_list = []
+                    while Temp_no < Index_no or Temp_no == Index_no:
+                        Data_list[val] = Index_new[Temp_no]
+
+                        
+
+                Temp_no += 1
+
+
+
+
+
+
 
         #Below all(most) the GUI elements are created and added to the window          
         var = IntVar() #not entirely sure what this does, though i belevie it could simple be substituted for a interger pr string within the radio button declaration itself
@@ -151,7 +185,10 @@ class Flight_sim():
         Data_scroll = Scrollbar(Data_frame)
         Data_scroll.pack(side = RIGHT, fill = Y)
         Frame_data.config(yscrollcommand = Data_scroll.set)
-        Data_scroll.config( command = Frame_data.yview )
+        Data_scroll.config(command = Frame_data.yview)
+
+        Data_del = Button(Sim_window, text = 'delete', command = lambda:[Data_delete()])
+        Data_del.place(x = 300 * rw, y = 180 * rh)
 
         Terminal_frame = Frame(Sim_window, height = 50, width = 40, relief = GROOVE, bd = 2)
         Terminal_frame.place(x = 450 * rw, y = 40 * rh)
@@ -161,6 +198,8 @@ class Flight_sim():
         Terminal.pack(side = 'left', fill = 'y')
         Terminal.insert(INSERT, Terminal_text)
         Terminal.config(state = DISABLED) 
+
+
 
 
 

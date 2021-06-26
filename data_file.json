@@ -1,12 +1,12 @@
 {
-  "dic_one": {
-    "age": "12",
-    "name": "benjamin",
-    "lastname": "irwin"
-  },
-  "dic_two": {
-    "age": "17",
-    "name": "jevaan",
-    "lastname": "irwin"
-  }
+  "list": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "test": [
+    123
+  ],
+  "a": 321
 }
