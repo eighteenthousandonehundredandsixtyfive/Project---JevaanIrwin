@@ -94,6 +94,12 @@ class Flight_sim():
 
                 with open('flight_data.json', "w") as write_file:
                     json.dump(data, write_file, indent = 2)
+
+                List_data()
+
+                Terminal.config(state = NORMAL)
+                Terminal.insert(INSERT, '\nSaving Data: ' + str(File_name))
+                Terminal.config(state = DISABLED)
         
         def List_data(): #lists the data and adds to list box, in fucntion so that the listbox can be refreshed. 
             read_file = open("flight_data.json", "r")
@@ -102,40 +108,57 @@ class Flight_sim():
             Index_no = data['Flight_data']['Index']['Index_no']
             Temp_no = 1
 
+            Frame_data.delete(0, END)
+
             while Temp_no < Index_no or Temp_no == Index_no:
                 Frame_data.insert(int(Temp_no), str(data['Flight_data']['Index'][str(Temp_no)]))
                 Temp_no += 1
 
-        def Data_delete(): #for deleting data from 
-            Name = Frame_data.get(ANCHOR)
+        def Data_delete(): #for deleting data from the JSON file
+            Name = Frame_data.get(ANCHOR) #gets the name of the file that the user wants to delete
 
             read_file = open("flight_data.json", "r")
             data = json.load(read_file)
-            Index_new = data['Flight_data']['Index']
 
-            print(data)
-            print('\n' , Index_new)
+            del data['Flight_data'][str(Name)]
+
             Temp_no = 1
-            Index_no = data['Flight_data']['Index']['Index_no']
-            del data['Flight_data']['Index']
+            Index_num = data['Flight_data']['Index']['Index_no']
 
-            while Temp_no < Index_no or Temp_no == Index_no:
-                print(Temp_no)
-                Name_temp = data['Flight_data']['Index'][str(Temp_no)]
+            while Temp_no < Index_num or Temp_no == Index_num: # determines which number in the index is the name. 
+                if data['Flight_data']['Index'][str(Temp_no)] == Name:
+                    Name_no = Temp_no
+                Temp_no += 1 
 
-                if Name_temp == Name:
-                    #del Index_new[Temp_no]
-                    #del data['Flight_data'][Name]
+            del data['Flight_data']['Index'][str(Name_no)]
+            Temp_no = Name_no
+            Index_temp = data['Flight_data']['Index']
 
-                    val = 1
-                    Data_list = []
-                    while Temp_no < Index_no or Temp_no == Index_no:
-                        Data_list[val] = Index_new[Temp_no]
-
-                        
-
+            while Temp_no < Index_num:  
+                data['Flight_data']['Index'][str(Temp_no)] = data['Flight_data']['Index'][str(Temp_no+1)]
                 Temp_no += 1
 
+            data['Flight_data']['Index']['Index_no'] = Index_num - 1
+
+            with open('flight_data.json', "w") as write_file:
+                    json.dump(data, write_file, indent = 2)
+
+            List_data() #refreshes the checkbox to contain reflec the changed data
+
+            Terminal.config(state = NORMAL)
+            Terminal.insert(INSERT, '\nDeleting Data: ' + str(Name))
+            Terminal.config(state = DISABLED)
+        
+        def Load_data():
+            Name = Frame_data.get(ANCHOR) #gets the name of the file that the user wants to load
+
+            Terminal.config(state = NORMAL)
+            Terminal.insert(INSERT, '\nSaving Data: ' + str(Name))
+            Terminal.config(state = DISABLED)
+
+
+
+           
 
 
 
@@ -188,12 +211,16 @@ class Flight_sim():
         Data_scroll.config(command = Frame_data.yview)
 
         Data_del = Button(Sim_window, text = 'delete', command = lambda:[Data_delete()])
-        Data_del.place(x = 300 * rw, y = 180 * rh)
+        Data_del.place(x = 300 * rw, y = 205 * rh)
+        Data_refresh = Button(Sim_window, text = 'refresh', command = lambda:[List_data()])
+        Data_refresh.place(x = 350 * rw, y = 205 * rh)
+        Data_Load = Button(Sim_window, text = 'load', command = lambda:[Load_data()])
+        Data_Load.place(x = 400 * rw, y = 205 * rh)
 
         Terminal_frame = Frame(Sim_window, height = 50, width = 40, relief = GROOVE, bd = 2)
         Terminal_frame.place(x = 450 * rw, y = 40 * rh)
 
-        Terminal_text = 'Output Terminal'
+        Terminal_text = 'Output Terminal:'
         Terminal = Text(Terminal_frame, height = 50, width = 30)
         Terminal.pack(side = 'left', fill = 'y')
         Terminal.insert(INSERT, Terminal_text)
